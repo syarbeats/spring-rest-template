@@ -53,9 +53,15 @@ public class App
     	/**
     	 * UPDATE OBJECT DATA TO REST API ENDPOINT
     	 * **/
-    	Employee emps = app.getEmployeeById(707);
+    	Employee emps = app.getEmployeeById(202);
     	emps.setSalary(95000);
     	app.updateEmployeeData(emps);
+    	
+    	/**
+    	 * DELETE OBJECT DATA TO REST API ENDPOINT
+    	 * **/
+    	//Employee empt = app.getEmployeeById(708);
+    	app.deleteEmployee(708);
     	
   
     	
@@ -157,5 +163,22 @@ public class App
     	}
     	
     	return "Update data was failed..";
+    }
+    
+    /**
+	 * DELETE OBJECT DATA TO REST API ENDPOINT
+	 * **/
+    public String deleteEmployee(int id) {
+    	
+    	RestTemplate restTemplate = new RestTemplate();
+    	
+    	try {
+    		restTemplate.delete(DELETE_EMPLOYEE+"/"+id);
+    		return "Delete employe data with id:"+id+" has been done successfully";
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return "Delete data was failed..";
     }
 }
