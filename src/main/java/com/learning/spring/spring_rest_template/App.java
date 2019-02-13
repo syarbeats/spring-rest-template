@@ -2,6 +2,7 @@ package com.learning.spring.spring_rest_template;
 
 import java.util.List;
 
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -72,5 +73,19 @@ public class App
     	}catch(Exception e) {
     		e.printStackTrace();
     	}
+    	
+    	/**
+    	 * POST OBJECT DATA TO REST API ENDPOINT
+    	 * **/
+    	HttpEntity<Employee> request = new HttpEntity<>(new Employee(802, "Schrodinger", 65000));
+    	
+    	try {
+    		Employee empl = restTemplate.postForObject(ADD_EMPLOYEE, request, employee.getClass());
+    		System.out.println("Employee Data "+empl.getName()+" Salary: "+empl.getSalary()+" has been inserted successfully...");
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	
     }
 }
