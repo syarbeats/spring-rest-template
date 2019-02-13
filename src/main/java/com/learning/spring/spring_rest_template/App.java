@@ -34,9 +34,11 @@ public class App
     	 * **/
     	//ResponseEntity<String> response = restTemplate.getForEntity(getEmployeeResourceUrl+"?page=1&size=3", String.class);
     	response = restTemplate.getForEntity(getEmployeeByIdResourceUrl+"/202", String.class);
+    	Employee employee = restTemplate.getForObject(getEmployeeByIdResourceUrl+"/202", Employee.class);
     	
     	System.out.println("Response Status Code: "+response.getStatusCode());
     	System.out.println("Response Body: "+response.getBody());
+    	System.out.println("Employee Name:"+employee.getName()+" Salary: "+employee.getSalary());
        
     	mapper =  new ObjectMapper();
        
