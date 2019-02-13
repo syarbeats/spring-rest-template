@@ -3,6 +3,7 @@ package com.learning.spring.spring_rest_template;
 import java.util.List;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -47,7 +48,14 @@ public class App
     	/**
     	 * POST OBJECT DATA TO REST API ENDPOINT
     	 * **/
-    	app.addEmployee(new Employee(708, "Chapo El Guzman", 150000));
+    	app.addEmployee(new Employee(709, "Felix Guardo", 150000));
+    	
+    	/**
+    	 * UPDATE OBJECT DATA TO REST API ENDPOINT
+    	 * **/
+    	Employee emps = app.getEmployeeById(707);
+    	emps.setSalary(95000);
+    	app.updateEmployeeData(emps);
     	
   
     	
@@ -134,4 +142,20 @@ public class App
     	return null;
     }
     
+    /**
+	 * UPDATE OBJECT DATA TO REST API ENDPOINT
+	 * **/
+    public String updateEmployeeData(Employee emp) {
+    	RestTemplate restTemplate = new RestTemplate();
+    	HttpEntity<Employee> requestUpdate = new HttpEntity<>(emp);
+    	
+    	try {
+    		restTemplate.exchange(UPDATE_EMPLOYEE, HttpMethod.POST, requestUpdate, Employee.class);
+    		return "Update employe data with id:"+emp.getId()+" has been done successfully";
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return "Update data was failed..";
+    }
 }
